@@ -1,0 +1,343 @@
+:root {
+  /* Common Variables */
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --radius: 12px;
+  --transition: all 0.3s ease;
+
+  /* Light Theme Defaults */
+  --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-nav: rgba(255, 255, 255, 0.8);
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --border-color: rgba(0, 0, 0, 0.05);
+  --card-hover-transform: translateY(-5px);
+}
+
+[data-theme="dark"] {
+  /* Dark Theme Overrides */
+  --primary: #6366f1;
+  /* Brighter accent for dark mode */
+  --primary-hover: #818cf8;
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --bg-card: rgba(30, 41, 59, 0.9);
+  --bg-nav: rgba(15, 23, 42, 0.8);
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  margin: 0;
+  font-family: 'Outfit', 'Inter', sans-serif;
+  /* Recommended Google Fonts */
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  transition: var(--transition);
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Navbar */
+
+/* Navbar */
+.navbar {
+  background: var(--bg-nav);
+  backdrop-filter: blur(12px);
+  padding: 1rem 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 500;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+.nav-brand {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  /* Fallback */
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-user {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.nav-logout {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #ef4444;
+  /* Keep red for logout */
+  padding: 0;
+  display: flex;
+  align-items: center;
+  width: auto;
+  box-shadow: none;
+}
+
+.nav-logout:hover {
+  background: transparent;
+  transform: scale(1.1);
+  box-shadow: none;
+}
+
+
+/* Cards & Containers */
+.auth-container,
+.dashboard-container,
+.feature-card,
+.symptom-checker-card {
+  background: var(--bg-card);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.auth-container {
+  max-width: 420px;
+  margin: 4rem auto;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.85rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  /* Transparent for dark mode compatibility */
+  color: var(--text-main);
+  transition: var(--transition);
+  box-sizing: border-box;
+  font-size: 1rem;
+  appearance: none;
+  /* remove default arrow to style consistently if needed, but keeping simple for now */
+}
+
+/* Ensure options have dark background in dark mode */
+[data-theme="dark"] select option {
+  background-color: #1e293b;
+  /* Dark slate matching bg-card */
+  color: #f1f5f9;
+}
+
+/* Explicit background for inputs in dark mode to avoid transparency issues with text overlap */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Buttons */
+.auth-btn,
+button {
+  background: var(--primary);
+  color: white;
+  padding: 0.85rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  width: 100%;
+  font-size: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.auth-btn:hover,
+button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 10px -2px rgba(0, 0, 0, 0.15);
+}
+
+/* Features */
+.feature-card {
+  text-align: center;
+  transition: var(--transition);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  cursor: pointer;
+}
+
+.feature-card:hover {
+  transform: var(--card-hover-transform);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  background: var(--bg-card);
+  border-color: var(--primary);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+  background: rgba(99, 102, 241, 0.1);
+  padding: 1rem;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: transparent;
+  color: var(--text-main);
+  padding: 0.5rem;
+  width: auto;
+  border: 1px solid var(--border-color);
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.theme-toggle:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: rotate(15deg);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Headings */
+h2,
+h3 {
+  color: var(--text-main);
+  margin-bottom: 1rem;
+}
+
+
+/* Chat Styles */
+.chat-window {
+  flex: 1;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1rem;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+.chat-bubble {
+  padding: 0.75rem 1.25rem;
+  border-radius: 16px;
+  max-width: 75%;
+  position: relative;
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease;
+}
+
+.chat-bubble.sent {
+  align-self: flex-end;
+  background: var(--primary);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-bubble.received {
+  align-self: flex-start;
+  background: #f1f5f9;
+  color: #1f2937;
+  border-bottom-left-radius: 4px;
+}
+
+[data-theme="dark"] .chat-bubble.received {
+  background: #334155;
+  color: #f1f5f9;
+}
+
+.chat-sender-name {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.chat-form {
+  display: flex;
+  gap: 1rem;
+}
+
+.chat-input {
+  flex: 1;
+  background: var(--bg-card);
+  /* Ensure it matches card bg */
+}
